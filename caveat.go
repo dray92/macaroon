@@ -86,6 +86,18 @@ func RegisterCaveatType(name string, typ CaveatType, zeroValue Caveat) {
 	s2t[name] = typ
 }
 
+// Register an alternate name for this caveat type that will be recognized when
+// decoding JSON.
+func RegisterCaveatJSONAlias(typ CaveatType, alias string) {
+	if _, dup := s2t[alias]; dup {
+		panic("duplicate caveat type")
+	}
+	if _, exist := t2s[typ]; !exist {
+		panic("unregistered caveat type")
+	}
+	s2t[alias] = typ
+}
+
 func typeToCaveat(t CaveatType) (Caveat, error) {
 	cav, ok := t2c[t]
 	if !ok {

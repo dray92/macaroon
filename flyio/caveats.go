@@ -63,6 +63,7 @@ type Organization struct {
 
 func init() {
 	macaroon.RegisterCaveatType("Organization", CavOrganization, &Organization{})
+	macaroon.RegisterCaveatJSONAlias(CavOrganization, "DeprecatedOrganization")
 }
 
 func (c *Organization) CaveatType() macaroon.CaveatType {
@@ -135,6 +136,7 @@ type Apps struct {
 
 func init() {
 	macaroon.RegisterCaveatType("Apps", CavApps, &Apps{})
+	macaroon.RegisterCaveatJSONAlias(CavApps, "DeprecatedApps")
 }
 
 func (c *Apps) CaveatType() macaroon.CaveatType {
